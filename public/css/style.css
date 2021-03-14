@@ -1,0 +1,32 @@
+/********* Products ********/
+.products-section
+.heading {
+    font-weight: 700;
+    text-align: center;
+}
+
+.products-section
+.heading
+.underline {
+    margin: 0 auto;
+    width: 50px;
+    height: 3px;
+    background: rgb(55, 177, 177);
+}
+
+/********* Footer ********/
+.footer {
+    background: #222;
+    color: whitesmoke;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    font-size: 20px;
+}
+
+.footer span {
+    color: rgb(55, 177, 177);
+    font-size: 3rem;
+}

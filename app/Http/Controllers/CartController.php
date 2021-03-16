@@ -4,9 +4,54 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
-class PagesController extends Controller
+class CartController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware("auth");
+    }
+
+    public function add(Product $product)
+    {
+        $cartItem = array();
+        // array_push($cartItem, [
+        //     "name" => $product->name,
+        //     "price" => $product->price,
+        //     "quantity" => 1
+        // ]);
+        // Session::push(auth()->id(), [
+        //     $product->id => $cartItem
+        // ]);
+
+        if(!Session::get(auth()->id())) {
+            Session::put(auth()->id(), []);
+            $cartItem = [
+                $product->id => [
+                    "name" => $product->name,
+                    "price" => $product->price,
+                    "quantity" => 1
+                ]
+            ];
+            Session::push(auth()->id(), $cartItem);
+        } else {
+            $cartItem = [
+                $product->id => [
+                    "name" => $product->name,
+                    "price" => $product->price,
+                    "quantity" => 1
+                ]
+            ];
+            Session::push(auth()->id(), $cartItem);
+        }
+
+
+        return view("cart.add");
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,10 +59,7 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->Paginate(8);
-        return view("index", [
-            "products" => $products
-        ]);
+        //
     }
 
     /**

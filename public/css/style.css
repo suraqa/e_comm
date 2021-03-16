@@ -14,19 +14,121 @@
     background: rgb(55, 177, 177);
 }
 
+.products-section
+.card
+.card-body
+.add-to-cart-btn  {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: rgb(55, 177, 177);
+    border-color: rgb(55, 177, 177);
+}
+
+.products-section
+.card
+.card-body
+.add-to-cart-btn:hover {
+    background-color: rgb(55, 177, 177);
+    color: whitesmoke;
+}
+
+.products-section
+.card
+.card-body
+.wishlist-btn {
+    position: absolute;
+    bottom: 23px;
+    right: 10px;
+    color: whitesmoke;
+    background-color: rgb(55, 177, 177);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    transition: all .5s;
+}
+
+.products-section
+.card
+.card-body
+.wishlist-btn:hover {
+    background-color: whitesmoke;
+    color: rgb(55, 177, 177);
+}
+
+.products-section
+.view-more-btn {
+    background-color: rgb(55, 177, 177);
+    border: none;
+}
+
+.products-section
+.view-more-btn:active {
+    background-color: rgb(55, 177, 177) !important;
+    border: none !important;
+}
+
+.products-section
+.card {
+    height: 500px;
+}
+
+.products-section
+.card
+.product-link {
+    color: rgb(55, 177, 177);
+    text-decoration: none;
+}
+
+/*Create*/
+.product-create
+button,
+.product-edit
+button {
+    color: rgb(55, 177, 177);
+    border-color: rgb(55, 177, 177);
+}
+
+.product-create
+button:hover,
+.product-edit
+button:hover {
+    background-color: rgb(55, 177, 177);
+    color: whitesmoke;
+}
+
+.product-create
+button:active,
+.product-edit
+button:active {
+    background: rgb(55, 177, 177) !important;
+}
+
+.product-create
+button:focus,
+.product-edit
+button:focus {
+    box-shadow: none !important;
+}
+
+
+
 /********* Footer ********/
 .footer {
     background: #222;
     color: whitesmoke;
     text-align: center;
-    position: fixed;
+    position: relative;
     left: 0;
-    bottom: 0;
+    bottom: -11px;
     width: 100%;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .footer span {
     color: rgb(55, 177, 177);
-    font-size: 3rem;
+    font-size: 2.5rem;
 }

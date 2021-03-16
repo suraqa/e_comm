@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,4 +19,8 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('/', [PagesController::class, "index"]);
+Route::get('/', [PagesController::class, "index"])->name("home");
+
+Route::resource('/product', ProductController::class);
+
+Route::get("/add-to-cart/{product}", [CartController::class, "add"])->name("cart.add");

@@ -8,6 +8,24 @@
                 <h1>Products</h1>
                 <div class="underline"></div>
             </div>
+            @if (Session::get("success"))
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <div class="alert alert-success" role="alert" id="alert">
+                            <strong>{{ Session::get("success") }}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    const alertElement = document.getElementById("alert");
+                    setTimeout(() => {
+                        alertElement.classList.add("d-none");
+                    }, 3000);
+                </script>
+                {{ Session::forget("success") }}
+            @endif
+
             <div class="row">
                     @foreach ($products as $item)
                         <div class="col-xl-3 col-md-4 col-xs-6 col-sm-6">
@@ -30,10 +48,6 @@
                         </div>
 
                     @endforeach
-
-            </div>
-            <div class="text-center my-5">
-                <a href="{{ route("product.index") }}" class="btn btn-lg btn-primary view-more-btn">VIEW MORE</a>
 
             </div>
         </div>

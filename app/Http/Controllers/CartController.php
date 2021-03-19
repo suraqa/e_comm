@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -14,41 +17,68 @@ class CartController extends Controller
         $this->middleware("auth");
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show()
+    {
+        $cartProduct = DB::table('carts')
+            ->join('products', 'carts.product_id', '=', 'products.id')
+            ->select('carts.*', 'products.name', 'products.price')
+            ->get();
+        return view("cart.show", [
+            "cartProducts" => $cartProduct
+        ]);
+    }
+
     public function add(Product $product)
     {
-        $cartItem = array();
-        // array_push($cartItem, [
-        //     "name" => $product->name,
-        //     "price" => $product->price,
-        //     "quantity" => 1
-        // ]);
-        // Session::push(auth()->id(), [
-        //     $product->id => $cartItem
-        // ]);
+        $cartItem = new Cart();
 
-        if(!Session::get(auth()->id())) {
-            Session::put(auth()->id(), []);
-            $cartItem = [
-                $product->id => [
-                    "name" => $product->name,
-                    "price" => $product->price,
-                    "quantity" => 1
-                ]
-            ];
-            Session::push(auth()->id(), $cartItem);
+        if(count(Cart::where("product_id", $product->id)->get())) {
+            $cartUpdate = Cart::where("product_id", $product->id)->where("user_id", auth()->id())->get();
+            for($i = 0; $i < count($cartUpdate); $i++) {
+                if($i == 0) {
+                    $cartUpdate[$i]->update(["quantity" => $cartUpdate[$i]->quantity+1]);
+                }
+            }
         } else {
-            $cartItem = [
-                $product->id => [
-                    "name" => $product->name,
-                    "price" => $product->price,
-                    "quantity" => 1
-                ]
-            ];
-            Session::push(auth()->id(), $cartItem);
+            $cartItem->user_id = auth()->id();
+            $cartItem->product_id = $product->id;
+            $cartItem->product_name = $product->name;
+            $cartItem->quantity = 1;
+            $cartItem->save();
         }
 
+        return redirect()->back();
+    }
 
-        return view("cart.add");
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function update(Request $request)
+    {
+        Cart::where("product_id", $request->product_id)->update(["quantity" => $request->quantity]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        Cart::where("product_id", $request->product_id)->delete();
+        return response()->json(["msg" => "deleted"], 200);
     }
 
 
@@ -83,16 +113,7 @@ class CartController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -105,26 +126,5 @@ class CartController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

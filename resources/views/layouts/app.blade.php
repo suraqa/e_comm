@@ -64,6 +64,9 @@
                             <a class="dropdown-item" href="{{ route("product.create") }}">
                                 Add Products
                             </a>
+                            <a class="dropdown-item" href="{{ route("cart.show") }}">
+                                Show Cart
+                            </a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
@@ -80,8 +83,8 @@
         </div>
     </nav>
 
-
     @yield('content')
+
 
     <footer class="footer">
         <div class="container">
@@ -90,7 +93,8 @@
             </div>
         </div>
     </footer>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
 </body>
 
 </html>

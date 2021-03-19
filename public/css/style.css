@@ -116,6 +116,21 @@ button:focus {
 
 
 
+/********* Cart ********/
+
+.cart-section
+.del-btn {
+    font-size: 20px;
+}
+
+
+
+
+
+
+
+
+
 /********* Footer ********/
 .footer {
     background: #222;

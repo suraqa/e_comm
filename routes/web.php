@@ -24,3 +24,12 @@ Route::get('/', [PagesController::class, "index"])->name("home");
 Route::resource('/product', ProductController::class);
 
 Route::get("/add-to-cart/{product}", [CartController::class, "add"])->name("cart.add");
+
+Route::put('/update-quantity', [CartController::class, "update"]);
+
+Route::delete('/delete-item', [CartController::class, "destroy"]);
+
+Route::get("/cart", [CartController::class, "show"])->name("cart.show");
+
+Route::get('stripe', [StripeController::class, 'stripe']);
+Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');

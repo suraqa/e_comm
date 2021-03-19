@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,5 +33,7 @@ Route::delete('/delete-item', [CartController::class, "destroy"]);
 
 Route::get("/cart", [CartController::class, "show"])->name("cart.show");
 
-Route::get('stripe', [StripeController::class, 'stripe']);
-Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
+Route::get('/stripe', [StripeController::class, 'stripe'])->name("stripe.get");
+Route::post('/stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
+
+Route::post("/orders/add", [OrderController::class, "add"])->name("order.add");

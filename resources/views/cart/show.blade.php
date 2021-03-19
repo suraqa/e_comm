@@ -46,7 +46,7 @@
                 </tbody>
             </table>
             <div class="d-flex justify-content-end">
-                <button id="checkout-button" class="btn btn-lg btn-primary mt-5" style="margin-right: 120px">Checkout</button>
+                <a href="{{ route("stripe.get") }}" class="btn btn-lg btn-primary mt-5" style="margin-right: 120px">Checkout</a>
             </div>
         </div>
     </section>

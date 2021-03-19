@@ -33,4 +33,3 @@ const cartDelete = id => {
 
     $("#table").load(" #table");
 }
-

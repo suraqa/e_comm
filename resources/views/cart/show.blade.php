@@ -41,7 +41,7 @@
                             <td></td>
                             <td></td>
                             <th style="line-height: 30px">Total</th>
-                            <td style="font-size: 20px">PKR {{ $total }}</td>
+                            <td style="font-size: 20px" id="total">PKR {{ $total }}</td>
                         </tr>
                 </tbody>
             </table>

@@ -4,10 +4,13 @@ $.ajaxSetup({
     }
 });
 
+let total = 0;
 const update = (quantityElement, id) => {
     const priceElement = document.querySelector(`#price-${id}`);
     const subtotalElement = document.querySelector(`#subtotal-${id}`);
     subtotalElement.innerHTML = priceElement.innerHTML * quantityElement.value
+    $("#table").load(" #table");
+
 
     $.ajax({
         url: "/update-quantity",

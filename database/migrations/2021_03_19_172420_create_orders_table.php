@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId("user_id")->constrained("users");
             $table->string("cart_ids");
+            $table->unsignedInteger("total");
             $table->timestamps();
         });
     }
